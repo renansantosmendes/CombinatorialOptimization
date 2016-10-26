@@ -36,19 +36,19 @@ public class RequestDataAcessObject {
                 + " values (?,?,?,?,?,?,?)";
 
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            PreparedStatement statement = this.connection.prepareStatement(sql);
 
-            stmt.setString(1, request.getRequestId().toString());
-            stmt.setString(2, request.getPassengerOrigin().getNodeId().toString());
-            stmt.setString(3, request.getPassengerDestination().getNodeId().toString());
-            stmt.setString(4, request.getDayRequestWasMade().toString());
-            stmt.setString(5, request.getPickUpTime().toString());
-            stmt.setString(6, request.getDeliveryTimeWindowLower().toString());
-            stmt.setString(7, request.getDeliveryTimeWindowUpper().toString());
+            statement.setString(1, request.getRequestId().toString());
+            statement.setString(2, request.getPassengerOrigin().getNodeId().toString());
+            statement.setString(3, request.getPassengerDestination().getNodeId().toString());
+            statement.setString(4, request.getDayRequestWasMade().toString());
+            statement.setString(5, request.getPickUpTime().toString());
+            statement.setString(6, request.getDeliveryTimeWindowLower().toString());
+            statement.setString(7, request.getDeliveryTimeWindowUpper().toString());
 
             // executa
-            stmt.execute();
-            stmt.close();
+            statement.execute();
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -58,24 +58,26 @@ public class RequestDataAcessObject {
         try {
 
             List<Request> contatos = new ArrayList<Request>();
-            PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where nome = 'Renan'");
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
+            PreparedStatement statement = this.connection.prepareStatement("select * from request_test");
+            PreparedStatement statementForNodes = this.connection.prepareStatement("select * from nodes_test");
+            ResultSet resultSetForRequests = statement.executeQuery();
+            ResultSet rsForNodes = statementForNodes.executeQuery();
+            
+            while (resultSetForRequests.next()) {
                 //Integer requestId, Node passengerOrigin, Node passengerDestination, LocalDateTime dayRequestWasMade,
                 //LocalDateTime pickUpTime, LocalDateTime deliveryTimeWindowLower, LocalDateTime deliveryTimeWindowUpper
                 //Request contato = new Request(rs.getInt("request_id"),);
 
-                Date requestDay = rs.getDate("requestDay");
+                Date requestDay = resultSetForRequests.getDate("requestDay");
                 Instant instantRequestDay = Instant.ofEpochMilli(requestDay.getTime());
 
-                Date pickUpTime = rs.getDate("pickUpTime");
+                Date pickUpTime = resultSetForRequests.getDate("pickUpTime");
                 Instant instantPickUpTime = Instant.ofEpochMilli(pickUpTime.getTime());
 
-                Date deliveryTimeWindowLower = rs.getDate("deliveryTimeWindowLower");
+                Date deliveryTimeWindowLower = resultSetForRequests.getDate("deliveryTimeWindowLower");
                 Instant instantDeliveryTimeWindowLower = Instant.ofEpochMilli(deliveryTimeWindowLower.getTime());
 
-                Date deliveryTimeWindowUpper = rs.getDate("deliveryTimeWindowUpper");
+                Date deliveryTimeWindowUpper = resultSetForRequests.getDate("deliveryTimeWindowUpper");
                 Instant instantDeliveryTimeWindowUpper = Instant.ofEpochMilli(deliveryTimeWindowUpper.getTime());
                 
 //                Request contato = new Request(rs.getInt("request_id"), rs.getInt("passengerOrigin"), 
@@ -86,8 +88,8 @@ public class RequestDataAcessObject {
 //                //contato.setDataNascimento(LocalDateTime.ofInstant(instant, ZoneId.systemDefault()));
                 //contatos.add(contato);
             }
-            rs.close();
-            stmt.close();
+            resultSetForRequests.close();
+            statement.close();
             return contatos;
         } catch (SQLException e) {
             throw new RuntimeException(e);
