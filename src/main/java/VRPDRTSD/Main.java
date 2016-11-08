@@ -5,6 +5,7 @@
  */
 package VRPDRTSD;
 
+import VRPDRTSD.IntanceReaderWithMySQL.NodeDataAcessObject;
 import VRPDRTSD.IntanceReaderWithMySQL.RequestDataAcessObject;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -50,48 +51,51 @@ public class Main {
         //System.out.println(jsonObjeto);
         //parser = new JSONParser();
         //BufferedImage img = ImageIO.read(con.getInputStream());
-//        LocalDateTime agora = LocalDateTime.now();
-//        LocalDateTime depois = LocalDateTime.now().plusHours(2);
-//        
-//        Duration tempoEntre;
-//        tempoEntre = Duration.between(agora, depois);
-//        
-//        LocalDateTime agora = LocalDateTime.now();
-//        LocalDateTime daquiAUmaHora = LocalDateTime.now().plusHours(1);
-//        Duration duration;
-        //duration = Duration.between(agora, daquiAUmaHora);
-//        Request request;
-//        request = new Request(1,null,null,null,null,null);
-        //request.teste();
-       
 
-//dao.addNodeIntoDataBase(node);
-        //nodes = ArrayList<>();
-        Node node0 = new Node(0, 40.7143528, -74.0059731);
-        Node node1 = new Node(1, 40.7143528, -74.0059731);
-        Node node2 = new Node(2, 40.7143528, -74.0059731);
-        Node node3 = new Node(3, 40.7143528, -74.0059731);
-        Node node4 = new Node(4, 40.7143528, -74.0059731);
-        Node node5 = new Node(5, 40.7143528, -74.0059731);
-        Node node6 = new Node(6, 40.7143528, -74.0059731);
-        
-        Request requestA = new Request(0, node2, node3, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(40),java.time.LocalDateTime.now().plusMinutes(55));
-        Request requestB = new Request(1, node2, node5, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(40),java.time.LocalDateTime.now().plusMinutes(55));
-        Request requestC = new Request(2, node4, node6, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(50),java.time.LocalDateTime.now().plusMinutes(65));
-        Request requestD = new Request(3, node2, node1, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(50),java.time.LocalDateTime.now().plusMinutes(65));
-        
-        List<Request> requests = new ArrayList<>();
-        requests.add(requestA);
-        requests.add(requestB);
-        requests.add(requestC);
-        requests.add(requestD);
-        
-        RequestDataAcessObject dao = new RequestDataAcessObject();
-        dao.addRequestIntoDataBase(requestA);
-        dao.addRequestIntoDataBase(requestB);
-        dao.addRequestIntoDataBase(requestC);
-        dao.addRequestIntoDataBase(requestD);
+//        Node node0 = new Node(0, 40.7143528, -74.0059731);
+//        Node node1 = new Node(1, 40.7143528, -74.0059731);
+//        Node node2 = new Node(2, 40.7143528, -74.0059731);
+//        Node node3 = new Node(3, 40.7143528, -74.0059731);
+//        Node node4 = new Node(4, 40.7143528, -74.0059731);
+//        Node node5 = new Node(5, 40.7143528, -74.0059731);
+//        Node node6 = new Node(6, 40.7143528, -74.0059731);
+//        
+//        List<Node> nodes = new ArrayList<>();
+//        nodes.add(node0);
+//        nodes.add(node1);
+//        nodes.add(node2);
+//        nodes.add(node3);
+//        nodes.add(node4);
+//        nodes.add(node5);
+//        nodes.add(node6);
+//        
+//        NodeDataAcessObject dao = new NodeDataAcessObject();
+//        nodes.forEach(u-> dao.addNodeIntoDataBaseOfDestinations(u));
+//dao.addNodeIntoDataBaseOfOrigins(node0);
+//        Request requestA = new Request(1, node2, node3, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(40),java.time.LocalDateTime.now().plusMinutes(55));
+//        Request requestB = new Request(2, node2, node5, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(40),java.time.LocalDateTime.now().plusMinutes(55));
+//        Request requestC = new Request(3, node4, node6, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(50),java.time.LocalDateTime.now().plusMinutes(65));
+//        Request requestD = new Request(4, node2, node1, java.time.LocalDateTime.now(),java.time.LocalDateTime.now(),java.time.LocalDateTime.now().plusMinutes(50),java.time.LocalDateTime.now().plusMinutes(65));
+//        
+//        List<Request> requests = new ArrayList<>();
+//        requests.add(requestA);
+//        requests.add(requestB);
+//        requests.add(requestC);
+//        requests.add(requestD);
+//    
+//        RequestDataAcessObject dao = new RequestDataAcessObject();
+//        dao.addRequestIntoDataBase(requestA);
+//        dao.addRequestIntoDataBase(requestB);
+//        dao.addRequestIntoDataBase(requestC);
+//        dao.addRequestIntoDataBase(requestD);
         //requests.forEach(u-> dao.addRequestIntoDataBase(u));
+       
+       
+       RequestDataAcessObject dao = new RequestDataAcessObject();
+       List<Request> listOfRequests = dao.getListOfRequest();
+       
+       listOfRequests.forEach(u -> System.out.println(u));
+     
     }
 
 }
