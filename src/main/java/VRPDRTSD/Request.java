@@ -174,5 +174,9 @@ public class Request {
             this.setFeasible(true);
         }
     }
+    
+    public String toString(){
+        return "Request: id = " + this.requestId + " Passenger Origin = " + this.passengerOrigin.getNodeId() + " Passenger Destination = " + this.passengerDestination.getNodeId();
+    }
 
 }
